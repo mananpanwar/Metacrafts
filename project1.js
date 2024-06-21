@@ -1,25 +1,27 @@
-var nftCollection = [];
+let nftDatabase = {};
+let nftCounter = 0;
 
-mintNFT = (nftName, nftId, nftDescription) => {
-    const nftObject = {
-        name: nftName,
-        nftId: nftId,
-        detail: nftDescription
+let mintNft = (name, description) =>{
+    nftCounter++;
+    let newNft = {
+        id: nftCounter,
+        name: name,
+        description: description
     };
-
-    nftCollection.push(nftObject);
+    nftDatabase[nftCounter] = newNft;
 };
 
-listNFTs = () => {
-    nftCollection.forEach((nft, index) => {
-        console.log(`NFT #${index + 1}`);
+let listNfts = () =>{
+    for(const id in nftDatabase){
+        const nft = nftDatabase[id];
+        console.log(`NFT ID: ${nft.id}`);
         console.log(`Name: ${nft.name}`);
-        console.log(`NtfId: ${nft.nftId}`);
-        console.log(`Details: ${nft.detail}`);
-    });
+        console.log(`Description: ${nft.description}`);
+    }
 };
 
-getTotalSupply = () => {
-    const count = nftCollection.length;
-    console.log(`Total no. of Nft's are ${count}`);
+let getTotalSupply = () =>{
+    console.log(Object.keys(nftDatabase).length);
 };
+
+
